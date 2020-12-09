@@ -13,7 +13,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   var _pages = [];
   var _appbars = [];
-  var _selectedIndex = 1;
+  var _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
