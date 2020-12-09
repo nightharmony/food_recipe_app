@@ -1,0 +1,13 @@
+classes
+Food 
+    String id;
+    String categoryId;
+    String title;
+    List<String> steps;
+    String imagePath;
+    DateTime addedAt;
+Category
+    String id;
+    String title;
+    IconData icon;
+    DateTime addedAt;
