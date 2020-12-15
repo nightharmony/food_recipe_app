@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe/models/food_recipe_model.dart';
+import 'package:food_recipe/providers/categories.dart';
+import 'package:provider/provider.dart';
+
+import '../../../models/category_model.dart';
+import '../../../models/food_recipe_model.dart';
 
 class FoodItem extends StatelessWidget {
   FoodRecipe foodRecipe;
@@ -11,6 +15,17 @@ class FoodItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Category category;
+
+    void findCategory(String id) {
+      var categoriesProvider = Provider.of<Categories>(context, listen: false);
+      category = categoriesProvider.categories.firstWhere((element){
+        return element.id == id;
+      });
+    }
+    
+    findCategory(foodRecipe.categoryId);
+
     final TextStyle categoryNameAndDuration = TextStyle(
       color: Colors.white,
       fontSize: 18,
@@ -62,7 +77,7 @@ class FoodItem extends StatelessWidget {
                         horizontal: 2.5,
                       ),
                       child: Text(
-                        foodRecipe.categoryId,
+                        category.title,
                         style: categoryNameAndDuration,
                       ),
                     ),

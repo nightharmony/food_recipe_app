@@ -15,7 +15,7 @@ class CategoryWidgetForHomePage extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            child: Image.asset("assets/images/today.jpg"),
+            child: Image.asset("assets/images/today.jpg", fit: BoxFit.cover,),
             height: 90,
             width: 90,
           ),

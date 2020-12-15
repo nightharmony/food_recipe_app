@@ -16,7 +16,7 @@ class _CategoriesInHomePageState extends State<CategoriesInHomePage> {
   @override
   void initState() { 
     super.initState();
-    
+    _getCategories();
   }
 
   Future<void> _getCategories() async {

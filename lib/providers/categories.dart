@@ -27,7 +27,6 @@ class Categories extends ChangeNotifier {
           addedAt: category['category_added_at'],
         ),
       );
-      notifyListeners();
     });
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class Category {
   final String id;
   final String title;
-  final IconData imageUrl;
+  final String imageUrl;
   final String categoryAddedByThisUserId;
   final String addedAt;
 

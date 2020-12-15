@@ -34,8 +34,8 @@ class FoodRecipes extends ChangeNotifier {
           addedAt: recipe["recipe_added_at"],
         ),
       );    
+      print("recipe category id = " + recipe["recipe_category_id"]);
     });
     }
-    print("items length : " + _items.length.toString());
   }
 }
