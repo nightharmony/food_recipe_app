@@ -7,6 +7,7 @@ import '../ui/general/theme_data.dart';
 import '../ui/general/appbar/appbar.dart';
 
 import '../providers/food_recipes.dart';
+import '../providers/categories.dart';
 
 class App extends StatefulWidget {
   @override
@@ -47,6 +48,9 @@ class _AppState extends State<App> {
       providers: [
         ChangeNotifierProvider.value(
           value: FoodRecipes(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Categories(),
         ),
       ],
       builder: (ctx, w) {

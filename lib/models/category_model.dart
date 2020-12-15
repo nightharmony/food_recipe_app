@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 
 class Category {
-  final String categoryId;
+  final String id;
   final String title;
-  final IconData icon;
-  final DateTime addedAt;
+  final IconData imageUrl;
+  final String categoryAddedByThisUserId;
+  final String addedAt;
 
   Category({
-    this.categoryId,
+    this.id,
     this.title,
-    this.icon,
+    this.imageUrl,
     this.addedAt,
+    this.categoryAddedByThisUserId,
   });
 }

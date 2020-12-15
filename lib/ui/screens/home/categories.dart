@@ -1,8 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe/models/category_model.dart';
+import 'package:food_recipe/providers/categories.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/category/category_in_home_page.dart';
 
-class CategoriesInHomePage extends StatelessWidget {
+class CategoriesInHomePage extends StatefulWidget {
+  @override
+  _CategoriesInHomePageState createState() => _CategoriesInHomePageState();
+}
+
+class _CategoriesInHomePageState extends State<CategoriesInHomePage> {
+  var _categories = [];
+
+  @override
+  void initState() { 
+    super.initState();
+    
+  }
+
+  Future<void> _getCategories() async {
+    var categories = Provider.of<Categories>(context, listen: false);
+    await categories.getCategories();
+    setState(() {
+      _categories = categories.categories;
+      print(categories.categories.length);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +42,6 @@ class CategoriesInHomePage extends StatelessWidget {
     );
   } 
 
-  // Title
   Container _buildTitle() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
@@ -32,19 +56,12 @@ class CategoriesInHomePage extends StatelessWidget {
     );
   }
 
-  // List
   Container _buildListView() {
     return Container(
       child: ListView(
-        children: [
-          CategoryWidgetForHomePage(
-            image: Image.asset(
-              "assets/images/today.jpg",
-              fit: BoxFit.cover,
-            ),
-            categoryName: "Meat",
-          ),
-        ],
+        children: _categories.map((category){
+          return CategoryWidgetForHomePage(category: category);
+        }).toList(),
         scrollDirection: Axis.horizontal,
       ),
       height: 90,

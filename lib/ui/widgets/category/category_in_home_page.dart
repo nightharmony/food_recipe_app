@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe/models/category_model.dart';
 
 class CategoryWidgetForHomePage extends StatelessWidget {
-  final Image image;
-  final String categoryName;
+  final Category category;
 
   const CategoryWidgetForHomePage({
     Key key,
-    @required this.image,
-    @required this.categoryName,
+    this.category,
   }) : super(key: key);
 
   @override
@@ -16,7 +15,7 @@ class CategoryWidgetForHomePage extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            child: image,
+            child: Image.asset("assets/images/today.jpg"),
             height: 90,
             width: 90,
           ),
@@ -24,7 +23,7 @@ class CategoryWidgetForHomePage extends StatelessWidget {
             color: Colors.black54,
             child: Center(
               child: Text(
-                categoryName,
+                category.title,
                 style: TextStyle(
                     color: Colors.white, letterSpacing: -0.3, fontSize: 18),
               ),

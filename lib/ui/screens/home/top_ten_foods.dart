@@ -15,7 +15,7 @@ class TopTenFoods extends StatefulWidget {
 
 class _TopTenFoodsState extends State<TopTenFoods> {
   // -- ! Food Recipe List Here ! --
-  var foodRecipeList = [];
+  var _foodRecipes = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -27,7 +27,7 @@ class _TopTenFoodsState extends State<TopTenFoods> {
     var foodRecipes = Provider.of<FoodRecipes>(context, listen: false);
     await foodRecipes.getFoodRecipes();
     setState(() {
-      foodRecipeList = foodRecipes.foodRecipes;
+      _foodRecipes = foodRecipes.foodRecipes;
     });
   }
 
@@ -38,7 +38,7 @@ class _TopTenFoodsState extends State<TopTenFoods> {
         children: [
           _buildTitle(),
           Column(
-            children: foodRecipeList.map((food) {
+            children: _foodRecipes.map((food) {
               return FoodItem(
                 foodRecipe: food,
               );
