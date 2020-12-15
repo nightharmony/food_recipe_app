@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe/models/food_recipe_model.dart';
 
 class FoodItem extends StatelessWidget {
-  final Image image;
-  final String title;
-  final String duration;
-  final String categoryName;
+  FoodRecipe foodRecipe;
 
-  const FoodItem({
+  FoodItem({
     Key key,
-    @required this.image,
-    @required this.title,
-    @required this.duration,
-    @required this.categoryName,
+    @required this.foodRecipe,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle categoryNameAndDuration = TextStyle(
+      color: Colors.white,
+      fontSize: 18,
+      fontWeight: FontWeight.w300,
+    );
     return Container(
       height: 120,
       color: Colors.red,
@@ -23,17 +23,20 @@ class FoodItem extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            child: image,
+            child: Image.asset(
+              "assets/images/today.jpg",
+              fit: BoxFit.cover,
+            ),
           ),
           Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  title,
+                  foodRecipe.title,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -59,9 +62,8 @@ class FoodItem extends StatelessWidget {
                         horizontal: 2.5,
                       ),
                       child: Text(
-                        categoryName,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w300),
+                        foodRecipe.categoryId,
+                        style: categoryNameAndDuration,
                       ),
                     ),
                     SizedBox(
@@ -86,13 +88,11 @@ class FoodItem extends StatelessWidget {
                           Icon(
                             Icons.timer,
                             color: Colors.white,
-                            size: 15,
+                            size: 17,
                           ),
                           Text(
-                            duration,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w300),
+                            "${foodRecipe.duration} min",
+                            style: categoryNameAndDuration,
                           )
                         ],
                       ),

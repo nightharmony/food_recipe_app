@@ -1,22 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe/data/datas.dart';
 
+import 'package:provider/provider.dart';
+// Widgets
 import '../../widgets/food/food_item.dart';
+// Models
+import '../../../models/food_recipe_model.dart';
+// Providers
+import '../../../providers/food_recipes.dart';
 
-class TopTenFoods extends StatelessWidget {
+class TopTenFoods extends StatefulWidget {
+  @override
+  _TopTenFoodsState createState() => _TopTenFoodsState();
+}
+
+class _TopTenFoodsState extends State<TopTenFoods> {
+  // -- ! Food Recipe List Here ! --
+  var foodRecipeList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getFoodRecipes();
+  }
+
+  Future<void> _getFoodRecipes() async {
+    var foodRecipes = Provider.of<FoodRecipes>(context, listen: false);
+    await foodRecipes.getFoodRecipes();
+    setState(() {
+      foodRecipeList = foodRecipes.foodRecipes;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
           _buildTitle(),
-          FoodItem(
-            image: Image.asset(
-              "assets/images/today.jpg",
-              fit: BoxFit.cover,
-            ),
-            title: "Food Name",
-            categoryName: "try again 45",
-            duration: "45 Min",
+          Column(
+            children: foodRecipeList.map((food) {
+              return FoodItem(
+                foodRecipe: food,
+              );
+            }).toList(),
           ),
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
