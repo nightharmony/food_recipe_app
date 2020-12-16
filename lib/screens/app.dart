@@ -27,16 +27,18 @@ class _AppState extends State<App> {
 
   // Screens
   HomeScreen homeScreen;
+  SocialScreen socialScreen;
   // Appbars
   GeneralAppBar homeAppBar;
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     // Pages
     homeScreen = HomeScreen();
-    _pages = [homeScreen, homeScreen, homeScreen, homeScreen, homeScreen];
+    socialScreen = SocialScreen();
+    _pages = [homeScreen, homeScreen, homeScreen, socialScreen, homeScreen];
     // Appbars
     homeAppBar = GeneralAppBar("FoodRecipes");
     _appbars = [homeAppBar, homeAppBar, homeAppBar, homeAppBar, homeAppBar];

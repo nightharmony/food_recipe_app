@@ -3,7 +3,7 @@ class FoodRecipe {
   final String categoryId;
   final String title;
   final int duration;
-  final List<String> ingredients;
+  final List<dynamic> ingredients;
   final List<String> steps;
   final String imagePath;
   final String addedAt;

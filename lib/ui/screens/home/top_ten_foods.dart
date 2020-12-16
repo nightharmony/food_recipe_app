@@ -28,6 +28,8 @@ class _TopTenFoodsState extends State<TopTenFoods> {
     await foodRecipes.getFoodRecipes();
     setState(() {
       _foodRecipes = foodRecipes.foodRecipes;
+      foodRecipes.foodRecipes.forEach((element) {print(element);});
+      print(foodRecipes.foodRecipes.length.toString() + "foodRecipes Length");
     });
   }
 

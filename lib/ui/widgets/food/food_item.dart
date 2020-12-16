@@ -15,7 +15,7 @@ class FoodItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Category category;
+    Category category = Category();
 
     void findCategory(String id) {
       var categoriesProvider = Provider.of<Categories>(context, listen: false);
@@ -77,7 +77,7 @@ class FoodItem extends StatelessWidget {
                         horizontal: 2.5,
                       ),
                       child: Text(
-                        category.title,
+                        category.title == null ? "undefined" : category.title,
                         style: categoryNameAndDuration,
                       ),
                     ),
