@@ -16,6 +16,7 @@ class TopTenFoods extends StatefulWidget {
 class _TopTenFoodsState extends State<TopTenFoods> {
   // -- ! Food Recipe List Here ! --
   var _foodRecipes = [];
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -28,7 +29,9 @@ class _TopTenFoodsState extends State<TopTenFoods> {
     await foodRecipes.getFoodRecipes();
     setState(() {
       _foodRecipes = foodRecipes.foodRecipes;
-      foodRecipes.foodRecipes.forEach((element) {print(element);});
+      foodRecipes.foodRecipes.forEach((element) {
+        print(element);
+      });
       print(foodRecipes.foodRecipes.length.toString() + "foodRecipes Length");
     });
   }
@@ -40,11 +43,13 @@ class _TopTenFoodsState extends State<TopTenFoods> {
         children: [
           _buildTitle(),
           Column(
-            children: _foodRecipes.map((food) {
-              return FoodItem(
-                foodRecipe: food,
-              );
-            }).toList(),
+            children: _foodRecipes.length == null || _foodRecipes.length == 0
+                ? []
+                : _foodRecipes.map((food) {
+                    return FoodItem(
+                      foodRecipe: food,
+                    );
+                  }).toList(),
           ),
         ],
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -76,7 +76,7 @@ class TodaysFoodRecipe extends StatelessWidget {
             "LOOK TO RECIPE",
             style: TextStyle(color: Colors.white),
           ),
-          color: Colors.green[800],
+          color: Colors.indigo,
           highlightColor: Colors.red[900],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0),

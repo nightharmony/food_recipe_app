@@ -23,6 +23,7 @@ class FoodRecipes extends ChangeNotifier {
     if (_items.length > recipes.length || _items.length < recipes.length) {
       for(var recipe in recipes) {
         List<dynamic> ingredientList = await _returnIngredientList(recipe["recipe_id"]);
+        List<dynamic> stepList = await _returnStepList(recipe["recipe_id"]);
 
         _items.add(
           FoodRecipe(
@@ -32,8 +33,8 @@ class FoodRecipes extends ChangeNotifier {
             title: recipe["recipe_title"],
             imagePath: recipe["recipe_image_url"],
             ingredients: ingredientList,
-            steps: [],
-            duration: 3,
+            steps: stepList,
+            duration: int.parse(recipe['recipe_duration']),
             addedAt: recipe["recipe_added_at"],
           ),
         );
@@ -51,6 +52,21 @@ class FoodRecipes extends ChangeNotifier {
       ingredientList.add(ingredient['ingredient_text']);
     }
     return ingredientList;
+  }
+
+  // Returning Steps List
+  Future<List<dynamic>> _returnStepList(String id) async {
+    var stepList = [];
+    var url = Services.GET_STEPS + id;
+    var response = await http.get(url);
+    var steps = json.decode(response.body) as List<dynamic>;
+    for(var step in steps){
+      stepList.add({
+        'step_number' : step['step_number'],
+        'step_text' : step['step_text'],
+      });
+    }
+    return stepList;
   }
 
   // Find Category
@@ -77,8 +93,6 @@ class FoodRecipes extends ChangeNotifier {
         addedAt: categoryAddedAt,
       );
     }
-
-    category = null;
 
     print(response.body);
 

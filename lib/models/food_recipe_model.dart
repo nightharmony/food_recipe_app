@@ -4,7 +4,7 @@ class FoodRecipe {
   final String title;
   final int duration;
   final List<dynamic> ingredients;
-  final List<String> steps;
+  final List<dynamic> steps;
   final String imagePath;
   final String addedAt;
   final String authorId;
