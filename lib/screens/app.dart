@@ -6,8 +6,7 @@ import 'screens.dart';
 import '../ui/general/theme_data.dart';
 import '../ui/general/appbar/appbar.dart';
 
-import '../providers/food_recipes.dart';
-import '../providers/categories.dart';
+import '../providers/providers.dart';
 
 class App extends StatefulWidget {
   @override
@@ -28,20 +27,21 @@ class _AppState extends State<App> {
   // Screens
   HomeScreen homeScreen;
   SocialScreen socialScreen;
+  AccountScreen accountScreen;
   // Appbars
   GeneralAppBar homeAppBar;
 
   @override
   void initState() {
-    
     super.initState();
     // Pages
     homeScreen = HomeScreen();
     socialScreen = SocialScreen();
-    _pages = [homeScreen, homeScreen, homeScreen, socialScreen, homeScreen];
+    accountScreen = AccountScreen();
+    _pages = [homeScreen, homeScreen, socialScreen, accountScreen];
     // Appbars
     homeAppBar = GeneralAppBar("FoodRecipes");
-    _appbars = [homeAppBar, homeAppBar, homeAppBar, homeAppBar, homeAppBar];
+    _appbars = [homeAppBar, homeAppBar, homeAppBar, homeAppBar];
   }
 
   @override
@@ -53,6 +53,9 @@ class _AppState extends State<App> {
         ),
         ChangeNotifierProvider.value(
           value: Categories(),
+        ),
+        ChangeNotifierProvider.value(
+          value: UserProvider(),
         ),
       ],
       builder: (ctx, w) {
@@ -81,10 +84,6 @@ class _AppState extends State<App> {
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
           label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add_box_outlined),
-          label: 'Post',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.forum),
