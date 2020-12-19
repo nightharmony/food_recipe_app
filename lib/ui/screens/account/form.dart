@@ -1,23 +1,30 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe/providers/user_provider.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nanoid/nanoid.dart';
 
 import '../../../services/services.dart';
 
-class AccountSign extends StatefulWidget {
+import '../../../providers/user_provider.dart';
+
+class AccountLogin extends StatefulWidget {
   @override
-  _AccountSignState createState() => _AccountSignState();
+  _AccountLoginState createState() => _AccountLoginState();
 }
 
-class _AccountSignState extends State<AccountSign> {
+class _AccountLoginState extends State<AccountLogin> {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   var _formKey = GlobalKey<FormState>();
 
   var _authDetail = "";
   var _password = "";
+
+  var mode = "login";
 
   Future<void> _login() async {
     _formKey.currentState.save();
@@ -25,7 +32,14 @@ class _AccountSignState extends State<AccountSign> {
     try {
       bool respond = await user.userLogin(_authDetail, _password);
       if (respond == true) {
-        print("giriş başarılı");
+        var token = nanoid(256);
+        var prefs = await _prefs;
+        var isRegistered = await user.sessionRegister(token, user.currentUser.userId);
+        if(isRegistered){
+          prefs.setString('authToken', token);
+        }else{
+          print("session cant register");
+        }
       } else {
         print("giriş başarısız");
       }
@@ -33,6 +47,11 @@ class _AccountSignState extends State<AccountSign> {
       print(e);
     }
   }
+
+  void _signUp() {
+    Navigator.of(context).pushNamed("signup");
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +70,11 @@ class _AccountSignState extends State<AccountSign> {
               RaisedButton(
                 onPressed: _login,
                 child: Text("SIGN IN"),
-              )
+              ),
+              OutlinedButton(
+                onPressed: _signUp,
+                child: Text("SIGN UP"),
+              ),
             ],
           )),
       height: size.height,

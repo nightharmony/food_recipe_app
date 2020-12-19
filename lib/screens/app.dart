@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe/ui/widgets/account_screen/add_new_post.dart';
 import 'package:provider/provider.dart';
 
 import 'screens.dart';
 
+import '../ui/screens/account/signup.dart';
+import '../ui/widgets/account_screen/post_details.dart';
 import '../ui/general/theme_data.dart';
-import '../ui/general/appbar/appbar.dart';
+import '../ui/general/appbar/inc.dart';
 
 import '../providers/providers.dart';
 
@@ -30,6 +33,7 @@ class _AppState extends State<App> {
   AccountScreen accountScreen;
   // Appbars
   GeneralAppBar homeAppBar;
+  AccountAppBar accountAppBar;
 
   @override
   void initState() {
@@ -39,9 +43,6 @@ class _AppState extends State<App> {
     socialScreen = SocialScreen();
     accountScreen = AccountScreen();
     _pages = [homeScreen, homeScreen, socialScreen, accountScreen];
-    // Appbars
-    homeAppBar = GeneralAppBar("FoodRecipes");
-    _appbars = [homeAppBar, homeAppBar, homeAppBar, homeAppBar];
   }
 
   @override
@@ -64,10 +65,14 @@ class _AppState extends State<App> {
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           home: Scaffold(
-            appBar: _appbars[_selectedIndex],
             body: _pages[_selectedIndex],
             bottomNavigationBar: _buildBottomNavigationBar,
           ),
+          routes: {
+            "signup": (ctx) => SignUp(),
+            "post-details": (ctx) => PostDetails(),
+            "add-new-post": (ctx) => AddNewPost(),
+          },
         );
       },
     );
